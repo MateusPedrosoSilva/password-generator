@@ -1,8 +1,18 @@
 "use client";
 import { useState } from "react";
+import caracterOptions from "./data/CaracterOptions";
+import OptionCheckbox from "./components/OptionCheckbox";
 
 export default function Home() {
   const [passwordSize, setPasswordSize] = useState<number>(8);
+  const [caracterTypes, setCaracterTypes] = useState(caracterOptions);
+
+  const handleOptionsChange = (index: number) => {
+    const aux = [...caracterTypes];
+    aux[index].value = !aux[index].value;
+    setCaracterTypes([...aux]);
+  };
+
   return (
     <main className="flex flex-col items-center justify-center h-full">
       <h1 className="text-4xl text-gray-200 mb-4 text-center font-bold">
@@ -21,6 +31,19 @@ export default function Home() {
             value={passwordSize}
             onChange={(e) => setPasswordSize(+e.target.value)}
           />
+        </div>
+        <div className="flex flex-col my-3">
+          {caracterTypes.map((caracterOption, i) => {
+            return (
+              <OptionCheckbox
+                text={caracterOption.name}
+                id={caracterOption.id}
+                key={caracterOption.id}
+                selected={caracterOption.value}
+                handleOptionsChange={() => handleOptionsChange(i)}
+              />
+            );
+          })}
         </div>
       </div>
     </main>
