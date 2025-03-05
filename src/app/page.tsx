@@ -2,15 +2,22 @@
 import { useState } from "react";
 import caracterOptions from "./data/CaracterOptions";
 import OptionCheckbox from "./components/OptionCheckbox";
+import Password from "./model/generatePassword";
 
 export default function Home() {
   const [passwordSize, setPasswordSize] = useState<number>(8);
   const [caracterTypes, setCaracterTypes] = useState(caracterOptions);
+  const [password, setPassword] = useState("");
 
   const handleOptionsChange = (index: number) => {
     const aux = [...caracterTypes];
     aux[index].value = !aux[index].value;
     setCaracterTypes([...aux]);
+  };
+
+  const generatePassword = () => {
+    const newPassword = Password.generatePassword(passwordSize, caracterTypes);
+    setPassword(newPassword);
   };
 
   return (
@@ -45,6 +52,13 @@ export default function Home() {
             );
           })}
         </div>
+        <button
+          className="text-white bg-blue-500 text-lg rounded font-bold w-full p-2 mt-3"
+          onClick={generatePassword}
+        >
+          Generate Password
+        </button>
+        {password}
       </div>
     </main>
   );
