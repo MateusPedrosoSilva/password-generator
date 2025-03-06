@@ -1,13 +1,22 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import caracterOptions from "./data/CaracterOptions";
 import OptionCheckbox from "./components/OptionCheckbox";
-import Password from "./model/generatePassword";
+import Password from "./model/Password";
+import ShowPassword from "./components/ShowPassword";
+import PasswordStrenght from "./components/PasswordStrenght";
 
 export default function Home() {
   const [passwordSize, setPasswordSize] = useState<number>(8);
   const [caracterTypes, setCaracterTypes] = useState(caracterOptions);
   const [password, setPassword] = useState("");
+  const [passwordStrenght, setPasswordStrenght] = useState(1);
+
+  useEffect(() => {
+    setPasswordStrenght(
+      Password.calculatePasswordStrenght(passwordSize, caracterTypes)
+    );
+  }, [passwordSize, caracterTypes]);
 
   const handleOptionsChange = (index: number) => {
     const aux = [...caracterTypes];
@@ -52,13 +61,14 @@ export default function Home() {
             );
           })}
         </div>
+        <PasswordStrenght strenght={passwordStrenght} />
         <button
           className="text-white bg-blue-500 text-lg rounded font-bold w-full p-2 mt-3"
           onClick={generatePassword}
         >
           Generate Password
         </button>
-        {password}
+        <ShowPassword password={password} />
       </div>
     </main>
   );
