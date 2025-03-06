@@ -54,12 +54,12 @@ export default class Password {
     );
     const typeAmount = hasNumbers + hasUppercas + hasLowercase + hasSpecial;
 
-    if (typeAmount === 4 && size > 10) {
-      return 3;
+    if (typeAmount <= 1 || size < 8) {
+      return 1;
     }
 
-    if (typeAmount === 2 || size < 8) {
-      return 1;
+    if (typeAmount >=3 && size > 11) {
+      return 3;
     }
 
     return 2;
