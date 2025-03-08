@@ -14,10 +14,8 @@ export default function Home() {
   const [passwordStrenght, setPasswordStrenght] = useState(1);
 
   useEffect(() => {
-    setPasswordStrenght(
-      Password.calculatePasswordStrenght(passwordSize, caracterTypes)
-    );
-  }, [passwordSize, caracterTypes]);
+    setPasswordStrenght(Password.calculatePasswordStrenght(password));
+  }, [password]);
 
   const handleOptionsChange = (index: number) => {
     const aux = [...caracterTypes];

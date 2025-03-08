@@ -21,7 +21,7 @@ export default class Password {
       possibleCaracters += "abcdefghijklmnopqrstuvwxyz";
     }
     if (Password.hasOptions(CaractersIds.SPECIAL, caracterOptions)) {
-      possibleCaracters += "!@#$%^&*-";
+      possibleCaracters += "!@#$%^&*-+=";
     }
 
     for (let index = 0; index < size; index++) {
@@ -32,32 +32,27 @@ export default class Password {
     return password;
   }
 
-  static calculatePasswordStrenght(
-    size: number,
-    caracterOptions: CaracterOption[]
-  ) {
-    const hasNumbers = +Password.hasOptions(
-      CaractersIds.NUMBERS,
-      caracterOptions
-    );
-    const hasUppercas = +Password.hasOptions(
-      CaractersIds.UPPERCASE,
-      caracterOptions
-    );
-    const hasLowercase = +Password.hasOptions(
-      CaractersIds.LOWERCASE,
-      caracterOptions
-    );
-    const hasSpecial = +Password.hasOptions(
-      CaractersIds.SPECIAL,
-      caracterOptions
-    );
-    const typeAmount = hasNumbers + hasUppercas + hasLowercase + hasSpecial;
+  static calculatePasswordStrenght(password: string): number {
+    const groups = [
+      { regex: /[a-z]/, size: 26 },
+      { regex: /[A-Z]/, size: 26 },
+      { regex: /[0-9]/, size: 10 },
+      { regex: /[!@#$%^&*-+=]/, size: 11 },
+    ];
 
-    if (typeAmount <= 1 || size < 8) return 1;
-    if (typeAmount >= 2 || size >= 10) return 2;
-    if (typeAmount >= 3 && size > 11) return 3;
+    let N: number = 0;
+    for (const group of groups) {
+      if (group.regex.test(password)) N += group.size;
+    }
 
-    return 2;
+    const L: number = password.length;
+
+    if (L === 0 || N === 0) return 0;
+
+    const passwordEntropy: number = L * Math.log2(N);
+    console.log("Entropia da senha é: " + passwordEntropy.toFixed(2));
+    console.log("L: " + L);
+    console.log("N: " + N);
+    return parseFloat(passwordEntropy.toFixed(2));
   }
 }

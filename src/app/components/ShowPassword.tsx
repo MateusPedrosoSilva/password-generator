@@ -20,7 +20,7 @@ export default function (props: ShowPasswordProps) {
     setTimeout(() => setCopyPopup(false), 1500);
     setTimeout(() => {
       props.onPasswordClear();
-    }, 10000);
+    }, 5000);
   };
 
   return (
