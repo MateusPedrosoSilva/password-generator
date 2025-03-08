@@ -6,15 +6,21 @@ import { useState } from "react";
 
 interface ShowPasswordProps {
   password: string;
+  onPasswordClear: () => void;
 }
 
 export default function (props: ShowPasswordProps) {
   const [copyPopup, setCopyPopup] = useState(false);
 
   const copyPassword = () => {
+    if (!props.password) return;
+
     navigator.clipboard.writeText(props.password);
     setCopyPopup(true);
     setTimeout(() => setCopyPopup(false), 1500);
+    setTimeout(() => {
+      props.onPasswordClear();
+    }, 10000);
   };
 
   return (

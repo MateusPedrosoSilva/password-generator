@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import caracterOptions from "./data/CaracterOptions";
 import OptionCheckbox from "./components/OptionCheckbox";
@@ -68,7 +69,10 @@ export default function Home() {
         >
           Generate Password
         </button>
-        <ShowPassword password={password} />
+        <ShowPassword
+          password={password}
+          onPasswordClear={() => setPassword("")}
+        />
       </div>
     </main>
   );
