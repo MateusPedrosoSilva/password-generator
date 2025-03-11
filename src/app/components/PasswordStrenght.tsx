@@ -1,6 +1,7 @@
 /* eslint-disable react/display-name */
 /* eslint-disable import/no-anonymous-default-export */
 
+import { BAR_COLORS } from "../constants/barConfig";
 import Bar from "./Bar";
 
 interface PasswordStronghtProps {
@@ -14,22 +15,22 @@ export default function (props: PasswordStronghtProps) {
       <Bar
         bgColor={
           props.strenght >= 60
-            ? "bg-green-500"
-            : (props.strenght >=40 || props.strenght <= 59)
-            ? "bg-yellow-500"
-            : "bg-red-500"
+            ? BAR_COLORS.green
+            : props.strenght >= 40 || props.strenght <= 59
+            ? BAR_COLORS.yellow
+            : BAR_COLORS.red
         }
       />
       <Bar
         bgColor={
           props.strenght >= 60
-            ? "bg-green-500"
-            : (props.strenght >=40 || props.strenght <= 59)
-            ? "bg-yellow-500"
+            ? BAR_COLORS.green
+            : props.strenght >= 40 || props.strenght <= 59
+            ? BAR_COLORS.yellow
             : ""
         }
       />
-      <Bar bgColor={props.strenght >= 60 ? "bg-green-500" : ""} />
+      <Bar bgColor={props.strenght >= 60 ? BAR_COLORS.green : ""} />
     </div>
   );
 }

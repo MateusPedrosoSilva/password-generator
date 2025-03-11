@@ -1,3 +1,4 @@
+import { CARACTER_TYPES } from "../constants/caractersConfig";
 import CaracterOption from "./CaracterOption";
 import CaractersIds from "./CaractersIds";
 
@@ -12,16 +13,16 @@ export default class Password {
     let password = "";
 
     if (Password.hasOptions(CaractersIds.NUMBERS, caracterOptions)) {
-      possibleCaracters += "0123456789";
+      possibleCaracters += CARACTER_TYPES.numbers;
     }
     if (Password.hasOptions(CaractersIds.UPPERCASE, caracterOptions)) {
-      possibleCaracters += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      possibleCaracters += CARACTER_TYPES.uppercase;
     }
     if (Password.hasOptions(CaractersIds.LOWERCASE, caracterOptions)) {
-      possibleCaracters += "abcdefghijklmnopqrstuvwxyz";
+      possibleCaracters += CARACTER_TYPES.lowercase;
     }
     if (Password.hasOptions(CaractersIds.SPECIAL, caracterOptions)) {
-      possibleCaracters += "!@#$%^&*-+=";
+      possibleCaracters += CARACTER_TYPES.special;
     }
 
     for (let index = 0; index < size; index++) {
@@ -34,10 +35,10 @@ export default class Password {
 
   static calculatePasswordStrenght(password: string): number {
     const groups = [
-      { regex: /[a-z]/, size: 26 },
-      { regex: /[A-Z]/, size: 26 },
-      { regex: /[0-9]/, size: 10 },
-      { regex: /[!@#$%^&*-+=]/, size: 11 },
+      { regex: /[a-z]/, size: CARACTER_TYPES.numbers.length },
+      { regex: /[A-Z]/, size: CARACTER_TYPES.uppercase.length },
+      { regex: /[0-9]/, size: CARACTER_TYPES.lowercase.length },
+      { regex: /[!@#$%^&*-+=]/, size: CARACTER_TYPES.special.length },
     ];
 
     let N: number = 0;
