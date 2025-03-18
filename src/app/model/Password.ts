@@ -42,6 +42,7 @@ export default class Password {
     ];
 
     let N: number = 0;
+    
     for (const group of groups) {
       if (group.regex.test(password)) N += group.size;
     }
