@@ -5,7 +5,8 @@ export const CARACTER_TYPES = {
   special: "!@#$%^&*-+=",
 };
 
-export const CARACTER_COLORS: Record<string, string> = {
+// export const CARACTER_COLORS: Record<string, string> = {
+export const CARACTER_COLORS = {
   lowercase: "text-blue-400",
   uppercase: "text-green-400",
   numbers: "text-yellow-400",
